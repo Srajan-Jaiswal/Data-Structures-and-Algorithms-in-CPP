@@ -1,3 +1,8 @@
+/*Given a string S with repeated characters (only lowercase). The task is to rearrange characters in a string such that no two adjacent characters are same.
+
+Note : It may be assumed that the string has only lowercase English alphabets.*/
+
+
 #include<bits/stdc++.h>
 using namespace std;
 #define int long long
