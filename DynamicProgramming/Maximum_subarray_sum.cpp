@@ -16,10 +16,10 @@ using namespace std;
 int max_sum(int* arr, int n)
 {
 	int dp[10001] = {0};
-	dp[0] = a[0] > 0 ? a[0] : 0;
+	dp[0] = arr[0] > 0 ? arr[0] : 0;
 	int max_till = dp[0];
 	fr(i, n) {
-		dp[i] = dp[i - 1] + a[i];
+		dp[i] = dp[i - 1] + arr[i];
 		if (dp[i] < 0) {
 			dp[i] = 0;
 		}
