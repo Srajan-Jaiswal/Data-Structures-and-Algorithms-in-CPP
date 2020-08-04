@@ -13,7 +13,7 @@ using namespace std;
 #define mp make_pair
 #define all(v) (v).begin(), (v).end()
 #define case cout << "Case " << t++ << ": ";
-int LIS(int *arr, int n, int *ans)
+int LIS(int *arr, int n, int *ans)   // recursion  solution LIS  O(exponential)
 {
 	if (n == 1) {
 		return 1;
@@ -35,6 +35,31 @@ void LIS_util(int *arr, int n) {
 	LIS(arr, n, &lis);
 	return lis;
 }
+
+
+int LIS_DP(int *arr, int n) {        // DP (Bottom UP) solution   O(n2) complexity 
+	int dp[n + 1];
+	dp[0] = INT_MIN;
+	for (int i = 1; i < n; i++) {
+		dp[i] = INT_MAX;
+	}
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < n; j++) {
+			if (dp[j] < arr[i] && arr[i] < dp[j + 1]) {
+				dp[j + 1] = arr[i];
+			}
+		}
+	}
+	int ans = 0;
+	for (int i = 0; i <= n; i++) {
+		if (dp[i] != INT_MAX) {
+			ans = i;
+		}
+	}
+	return ans;
+}
+
+
 int32_t main()
 {
 	ios_base::sync_with_stdio(0);
