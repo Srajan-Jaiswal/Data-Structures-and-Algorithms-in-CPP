@@ -31,7 +31,7 @@ int LIS(int *arr, int n, int *ans)
 	}
 	return answ;
 }
-void LIS_util(int *arr, int n) {
+int LIS_util(int *arr, int n) {
 	int *lis = 1;
 	LIS(arr, n, &lis);
 	return lis;
@@ -102,7 +102,7 @@ int32_t main()
 		fr(i, n) {
 			cin >> arr[i];
 		}
-		cout << LIS_util(arr, n) << endl;
+		cout << /*LIS_DP*/LIS_util(arr, n) << endl;
 	}
 	return 0;
 }
