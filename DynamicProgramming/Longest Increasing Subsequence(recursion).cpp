@@ -13,7 +13,8 @@ using namespace std;
 #define mp make_pair
 #define all(v) (v).begin(), (v).end()
 #define case cout << "Case " << t++ << ": ";
-int LIS(int *arr, int n, int *ans)   // recursion  solution LIS  O(exponential)
+// recursion  solution LIS  O(exponential)
+int LIS(int *arr, int n, int *ans)   
 {
 	if (n == 1) {
 		return 1;
