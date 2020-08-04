@@ -36,19 +36,33 @@ void LIS_util(int *arr, int n) {
 	return lis;
 }
 
-
-int LIS_DP(int *arr, int n) {        // DP (Bottom UP) solution   O(n2) complexity 
+//  DP (Bottom UP) solution  
+int LIS_DP(int *arr, int n) {        
 	int dp[n + 1];
 	dp[0] = INT_MIN;
 	for (int i = 1; i <= n; i++) {
 		dp[i] = INT_MAX;
 	}
+	
+	
+	//  O(N2) Complexity
 	for (int i = 0; i < n; i++) {
 		for (int j = 0; j < n; j++) {
 			if (dp[j] < arr[i] && arr[i] < dp[j + 1]) {
 				dp[j + 1] = arr[i];
 			}
 		}
+		
+		
+		// binary  Search optimisation O(N2)-->nlogn complexity
+		for (int i = 0; i < n; i++) {
+		int idx = upper_bound(dp, dp + n + 1, arr[i])-dp;
+		if(dp[idx-1]<arr[i] && dp[idx]>arr[i]){
+			dp[idx]=arr[i];
+		}
+	}
+		
+		
 	}
 	int ans = 0;
 	for (int i = 1; i <= n; i++) {
@@ -56,13 +70,15 @@ int LIS_DP(int *arr, int n) {        // DP (Bottom UP) solution   O(n2) complexi
 			ans = i;
 		}
 	}
+	// Length of LIS 
 	return ans;
-	// for printing LIS
-	/*for (int i = 1; i <= n; i++) {    
+	
+	// For printing LIS
+	for (int i = 1; i <= n; i++) {    
 		if (dp[i] != INT_MAX) {
 			cout<<dp[i];
 		}
-	}*/
+	}
 }
 
 
