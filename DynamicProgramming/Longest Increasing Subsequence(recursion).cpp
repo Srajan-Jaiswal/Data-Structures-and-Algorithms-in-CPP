@@ -40,7 +40,7 @@ void LIS_util(int *arr, int n) {
 int LIS_DP(int *arr, int n) {        // DP (Bottom UP) solution   O(n2) complexity 
 	int dp[n + 1];
 	dp[0] = INT_MIN;
-	for (int i = 1; i < n; i++) {
+	for (int i = 1; i <= n; i++) {
 		dp[i] = INT_MAX;
 	}
 	for (int i = 0; i < n; i++) {
@@ -51,12 +51,18 @@ int LIS_DP(int *arr, int n) {        // DP (Bottom UP) solution   O(n2) complexi
 		}
 	}
 	int ans = 0;
-	for (int i = 0; i <= n; i++) {
+	for (int i = 1; i <= n; i++) {
 		if (dp[i] != INT_MAX) {
 			ans = i;
 		}
 	}
 	return ans;
+	// for printing LIS
+	/*for (int i = 1; i <= n; i++) {    
+		if (dp[i] != INT_MAX) {
+			cout<<dp[i];
+		}
+	}*/
 }
 
 
