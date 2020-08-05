@@ -25,6 +25,19 @@ int catalan_no_rec(int n)
 	}
 	return ans;
 }
+
+// DP (Bottom UP)  O(N2) solution
+int catalan_DP(int n) {
+	int dp[n + 1] = {0};
+	dp[0] = 1, dp[1] = 1;
+	for (int i = 2; i <= n; i++) {
+		for (int j = 0; j < i; j++) {
+			dp[i] += dp[j] * dp[i - j - 1];
+		}
+	}
+	return dp[n];
+}
+
 int32_t main()
 {
 	ios_base::sync_with_stdio(0);
