@@ -25,6 +25,25 @@ int knapsack_rec(vector<int> &wt, vector<int> &vl, int w, int n) {
 		return knapsack_rec(wt, vl, w, n - 1);
 	}
 }
+// Memorization TOP-DOWN  optimised O(n*w)
+int knapsack_DP(vector<int> &wt, vector<int> &vl, int w, int n) {
+	dp[n + 1][wt + 1];
+	mem(dp, -1);
+	if (n == 0 || w == 0) {
+		return 0;
+	}
+	if (dp[n][w] != -1)
+	{
+		return dp[n][w];
+	}
+	if (wt[n - 1] <= w) {
+		return dp[n][w] = max(vl[n - 1] + knapsack_rec(wt, vl, w - wt[n - 1], n - 1), knapsack_rec(wt, vl, w, n - 1));
+	}
+	else {
+		return dp[n][w] = knapsack_rec(wt, vl, w, n - 1);
+	}
+	return dp[n][w] = knapsack_rec(wt, vl, w, n - 1);
+}
 int32_t main()
 {
 	ios_base::sync_with_stdio(0);
