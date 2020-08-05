@@ -13,7 +13,25 @@ using namespace std;
 #define mp make_pair
 #define all(v) (v).begin(), (v).end()
 #define case cout << "Case " << t++ << ": ";
-int LCS(string str1, string str2, a, b) {
+
+// Recursive Soln for LCS
+int LCS_Rec(string str1,string str2, int a,int b){
+
+	if(a == 0 || b == 0) 
+	{
+		return 0;
+	}
+	if(str1[a-1] == str2[b-1]) 
+	{
+		return (1 + LCS(str1,str2,a-1,b-1));
+	}   
+	else 
+	      return max(LCS(str1,str2,a,b-1), LCS(str1,str2,a-1,b));
+
+}
+
+// Top down DP optimisation
+int LCS(string str1, string str2, int a, int b) {
 	int dp[10001][10001];
 	for (int i = 0; i <= a; i++) {
 		dp[i][0] = {0};
