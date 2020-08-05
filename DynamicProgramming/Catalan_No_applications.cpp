@@ -1,6 +1,5 @@
 #include<bits/stdc++.h>
 using namespace std;
-
 #define fr(i,n)  for(int i=0;i<n;i++)
 #define fre(i,a,b)  for(int i=a;i<=b;i++)
 #define endl '\n'
@@ -13,6 +12,7 @@ using namespace std;
 #define mp make_pair
 #define all(v) (v).begin(), (v).end()
 #define case cout << "Case " << t++ << ": ";
+
 // recursive soln  exponential complexity
 int catalan_no_rec(int n)
 {
@@ -38,6 +38,19 @@ int catalan_DP(int n) {
 	return dp[n];
 }
 
+// count no of binary search trees using catalan no DP(Bottom UP)
+int count_bst(int n) {
+	int 	bst[n + 1] = {0};
+	bst[0] = 1;
+	bst[1] = 1;
+	int ans = 0;
+	for (int i = 2; i < n; i++) {
+		for (int j = 0; j < i; j++) {
+			bst[i] += bst[j - 1] * bst[i - j];
+		}
+	}
+	return bst[n];
+}
 int32_t main()
 {
 	ios_base::sync_with_stdio(0);
