@@ -25,8 +25,8 @@ int knapsack_rec(vector<int> &wt, vector<int> &vl, int w, int n) {
 		return knapsack_rec(wt, vl, w, n - 1);
 	}
 }
-// Memorization TOP-DOWN  optimised O(n*w)
-int knapsack_DP(vector<int> &wt, vector<int> &vl, int w, int n) {
+//optimised O(n*w)
+int knapsack_TD(vector<int> &wt, vector<int> &vl, int w, int n) {
 	dp[n + 1][wt + 1];
 	mem(dp, -1);
 	if (n == 0 || w == 0) {
@@ -43,6 +43,24 @@ int knapsack_DP(vector<int> &wt, vector<int> &vl, int w, int n) {
 		return dp[n][w] = knapsack_rec(wt, vl, w, n - 1);
 	}
 	return dp[n][w] = knapsack_rec(wt, vl, w, n - 1);
+}
+// T Complexity O(n*w)
+int knapsack_BU(vector<int> &wt, vector<int> &vl, int w, int v) {
+	dp[n + 1][w + 1];
+	for (i = 0; i < n + 1; i++) {
+		for (j = 0; j < w + 1; j++) {
+			if (i == 0 || j == 0) {
+				dp[i][j] == 0;
+			}
+			else if (wt[i - 1] <= j) {
+				dp[i][j] = max(val[i - 1] + dp[i - 1][j - wt[i - 1]], dp[i - 1][j]);
+			}
+			else {
+				dp[i][j] = dp[i - 1][j];
+			}
+		}
+	}
+	return dp[n][m];
 }
 int32_t main()
 {
