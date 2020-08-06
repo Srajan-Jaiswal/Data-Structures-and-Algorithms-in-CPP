@@ -37,12 +37,12 @@ int knapsack_TD(vector<int> &wt, vector<int> &vl, int w, int n) {
 		return dp[n][w];
 	}
 	if (wt[n - 1] <= w) {
-		return dp[n][w] = max(vl[n - 1] + knapsack_rec(wt, vl, w - wt[n - 1], n - 1), knapsack_rec(wt, vl, w, n - 1));
+		return dp[n][w] = max(vl[n - 1] + knapsack_TD(wt, vl, w - wt[n - 1], n - 1), knapsack_TD(wt, vl, w, n - 1));
 	}
 	else {
-		return dp[n][w] = knapsack_rec(wt, vl, w, n - 1);
+		return dp[n][w] = knapsack_TD(wt, vl, w, n - 1);
 	}
-	return dp[n][w] = knapsack_rec(wt, vl, w, n - 1);
+	return dp[n][w] = knapsack_TD(wt, vl, w, n - 1);
 }
 // T Complexity O(n*w)
 int knapsack_BU(vector<int> &wt, vector<int> &vl, int w, int v) {
