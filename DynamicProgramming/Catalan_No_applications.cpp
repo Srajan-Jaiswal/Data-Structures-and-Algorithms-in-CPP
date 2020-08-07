@@ -13,18 +13,7 @@ using namespace std;
 #define all(v) (v).begin(), (v).end()
 #define case cout << "Case " << t++ << ": ";
 
-// recursive soln  exponential complexity
-int catalan_no_rec(int n)
-{
-	if (n <= 0) {
-		return 1;
-	}
-	int ans = 0;
-	for (int i = 1; i <= n; i++) {
-		ans += catalan_no_rec(i - 1) * catalan_no_rec(n - i);
-	}
-	return ans;
-}
+
 
 // DP (Bottom UP)  O(N2) solution
 int catalan_DP(int n) {
