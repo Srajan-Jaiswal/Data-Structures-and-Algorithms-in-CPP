@@ -26,6 +26,19 @@ int catalan_no_rec(int n)
 	return ans;
 }
 
+// count no of binary search trees using catalan no DP(Bottom UP)
+int count_bst(int n) {
+	int 	bst[n + 1] = {0};
+	bst[0] = 1;
+	bst[1] = 1;
+	int ans = 0;
+	for (int i = 2; i < n; i++) {
+		for (int j = 0; j < i; j++) {
+			bst[i] += bst[j - 1] * bst[i - j];
+		}
+	}
+	return bst[n];
+}
 
 // DP (Bottom UP)  O(N2) solution
 int catalan_DP(int n) {
