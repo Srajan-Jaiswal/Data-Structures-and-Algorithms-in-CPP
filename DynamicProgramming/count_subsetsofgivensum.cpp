@@ -13,25 +13,29 @@ using namespace std;
 #define mp make_pair
 #define all(v) (v).begin(), (v).end()
 #define case cout << "Case " << t++ << ": ";
-int cnt_subset(vector<int> &v, int sum, int n, int cnt)
+int cnt_subset_dp(vector<int> &v, int sum, int n)
 {
-  if (n == 0)
+  int dp[n + 1][sum + 1];
+  for (int i = 0; i < n; i++)
   {
-    cnt += 1;
-    return cnt ;
+    dp[0][i] = 0;
+    dp[i][0] = 1;
   }
-  if (n == 0 && sum != 0)
+  for (int i = 1; i < n + 1; i++)
   {
-    return cnt;
+    for (int j = 1; j < sum + 1; j++)
+    {
+      if (v[i - 1] <= j)
+      {
+        dp[i][j] = dp[i - 1][j] + dp[i - 1][j - v[i - 1]];
+      }
+      else
+      {
+        dp[i][j] = dp[i - 1][j];
+      }
+    }
   }
-  if (v[n - 1] <= sum)
-  {
-    return cnt_subset(v, sum - v[n - 1], n - 1, cnt) || cnt_subset(v, sum, n - 1, cnt);
-  }
-  else
-  {
-    return cnt_subset(v, sum, n - 1, cnt);
-  }
+  return dp[n][sum];
 }
 int32_t main()
 {
