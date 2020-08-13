@@ -14,6 +14,7 @@ using namespace std;
 #define all(v) (v).begin(), (v).end()
 #define case cout << "Case " << t++ << ": ";
 
+// Recursive Approach
 bool eq_part(vector<int> &v, int sum, int n)
 {
 	if (sum == 0)
@@ -33,7 +34,6 @@ bool eq_part(vector<int> &v, int sum, int n)
 		return eq_part(v, sum, n - 1);
 	}
 }
-
 bool eq_part_util(vector<int> &v, int n)
 {
 	int sum = 0;
@@ -51,7 +51,6 @@ bool eq_part_util(vector<int> &v, int n)
 		return eq_part(v, sum, n);
 	}
 }
-
 int32_t main()
 {
 	int t;
