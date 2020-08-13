@@ -60,7 +60,7 @@ int knapsack_BU(vector<int> &wt, vector<int> &vl, int w, int v) {
 			}
 		}
 	}
-	return dp[n][m];
+	return dp[n][w];
 }
 int32_t main()
 {
