@@ -57,6 +57,7 @@ int MCM(vector<int> &v) {
 	}
 	return dp[0][n - 1];
 }
+dp[1001][1001];
 int32_t main()
 {
 	ios_base::sync_with_stdio(0);
