@@ -13,6 +13,26 @@ using namespace std;
 #define mp make_pair
 #define all(v) (v).begin(), (v).end()
 #define case cout << "Case " << t++ << ": ";
+
+// top down approach
+int dp[1001][1001];
+int OP_REC(vector<int> &v, int l, int r){
+    memset(dp,0,sizeof dp);
+	if(l > r) return 0;
+	if(l == r - 1) return max(v[l], v[r]);
+    
+    if(dp[l][r] != 0){
+    	return dp[l][r];
+    }
+    else{
+	int res1 = v[l] + min(OP_REC(v, l+1, r-1), OP_REC(v, l+2, r));
+	int res2 = v[r] + min(OP_REC(v, l+1, r-1), OP_REC(v, l, r-2));
+	dp[l][r]=max(res1, res2);
+    }
+    return dp[l][r];
+}
+
+// bottom up approach
 int op_game(vector<int> &v, int n)
 {
 	int dp[1001][1001];
