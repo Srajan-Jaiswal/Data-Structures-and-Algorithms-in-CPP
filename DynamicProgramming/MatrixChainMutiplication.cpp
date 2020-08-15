@@ -37,7 +37,7 @@ int MCM_Rec(vector<int> &v, int r, int c)
 }
 
 
-// optimisation  using memorisation(top down)   complexity O(n3)
+// optimisation  using tabulation (Bottom UP)   complexity O(n3)
 int MCM(vector<int> &v) {
 	int dp[1001][1001];
 	memset(dp, 0, sizeof dp);
