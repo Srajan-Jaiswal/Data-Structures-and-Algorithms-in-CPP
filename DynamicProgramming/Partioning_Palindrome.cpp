@@ -98,8 +98,11 @@ int32_t main()
 	{
 		string str;
 		cin >> str;
+		int dp[1001][1001];
+		memset(dp,0 ,sizeof dp);
 		int n = str.length();
 		cout << part_palindrome_rec(str, 0, n - 1) << endl;
+		
 	}
 	return 0;
 }
