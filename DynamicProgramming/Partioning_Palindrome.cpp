@@ -48,9 +48,9 @@ int part_palindrome_rec(string str, int i, int j)
 	}
 	return ans;
 }
-
+int static dp[1001][1001];
 //  optimised memorisation  O(n2)
-int part_palindrome_rec(string str, int dp[][1001] , int i, int j)
+int part_palindrome_rec(string str, int i, int j)
 {
 	if (i >= j)
 	{
@@ -68,14 +68,14 @@ int part_palindrome_rec(string str, int dp[][1001] , int i, int j)
 			l = dp[i][k];
 		}
 		else {
-			l = part_palindrome_rec(str, dp, i, k);
+			l = part_palindrome_rec(str, i, k);
 			dp[i][k] = l;
 		}
 		if (dp[k + 1][j] != 0) {
 			r = dp[k + 1][j];
 		}
 		else {
-			r = part_palindrome_rec(str, dp, k + 1, j);
+			r = part_palindrome_rec(str, k + 1, j);
 			dp[k + 1][j] = r;
 		}
 		ans = min(ans , (l + r + 1));
@@ -98,11 +98,9 @@ int32_t main()
 	{
 		string str;
 		cin >> str;
-		int dp[1001][1001];
 		memset(dp,0 ,sizeof dp);
 		int n = str.length();
-		cout << part_palindrome_rec(str, 0, n - 1) << endl;
-		
+		cout << part_palindrome_rec(str, 0, n - 1) << endl;		
 	}
 	return 0;
 }
