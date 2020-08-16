@@ -1,24 +1,3 @@
-/* Given a string, a partitioning of the string is a palindrome partitioning if every sub-string of the partition is a palindrome. For example, “aba|b|bbabb|a|b|aba” is a palindrome partitioning of “ababbbabbababa”. Determine the fewest cuts needed for palindrome partitioning of a given string. For example, minimum 3 cuts are needed for “ababbbabbababa”. The three cuts are “a|babbbab|b|ababa”.
-
-Input:
-The first line of input contains an integer T, denoting the number of test cases. Then T test cases follow. The first line of every Test Case consists of S, denoting a String.
-
-Output:
-For each test case in a new line print an integer, denoting the number cuts in the String to make it palindromic.
-
-Constraints:
-1<=T<=100
-1<=|Length of String|<=1000
-
-Example:
-Input:
-2
-ababbbabbababa
-aaabba
-
-Output:
-3
-1*/
 #include<bits/stdc++.h>
 using namespace std;
 #define int long long
@@ -50,6 +29,7 @@ bool is_palin(string s, int a, int b)
 	}
 	return true;
 }
+
 // Recursion 
 int part_palindrome_rec(string str, int i, int j)
 {
@@ -68,6 +48,41 @@ int part_palindrome_rec(string str, int i, int j)
 	}
 	return ans;
 }
+
+//  optimised memorisation  O(n2)
+int part_palindrome_rec(string str, int dp[][1001] , int i, int j)
+{
+	if (i >= j)
+	{
+		return 0;
+	}
+	if (is_palin(str, i, j))
+	{
+		return 0;
+	}
+	int ans = INT_MAX;
+	int l, r;
+	for (int k = i; k < j; k++)
+	{
+		if (dp[i][k] != 0) {
+			l = dp[i][k];
+		}
+		else {
+			l = part_palindrome_rec(str, dp, i, k);
+			dp[i][k] = l;
+		}
+		if (dp[k + 1][j] != 0) {
+			r = dp[k + 1][j];
+		}
+		else {
+			r = part_palindrome_rec(str, dp, k + 1, j);
+			dp[k + 1][j] = r;
+		}
+		ans = min(ans , (l + r + 1));
+	}
+	return ans;
+}
+
 int32_t main()
 {
 	ios_base::sync_with_stdio(0);
