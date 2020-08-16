@@ -50,6 +50,7 @@ bool is_palin(string s, int a, int b)
 	}
 	return true;
 }
+// Recursion 
 int part_palindrome_rec(string str, int i, int j)
 {
 	if (i >= j)
