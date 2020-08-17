@@ -14,8 +14,70 @@ using namespace std;
 #define all(v) (v).begin(), (v).end()
 #define case cout << "Case " << t++ << ": ";
 
+// unordered map  method
+// Memorisation in recursion
+int ans = 0;
+unordered_map<string, int> dp;
+int bool_parenthesis(string s, int i, int j, bool checkt)
+{
+	if (i > j) {
+		return 0;
+	}
+	if (i == j) {
+		if (checkt)
+			return s[i] == 'T' ? 1 : 0;
+	}
+	else {
+		return s[i] == 'F' ? 1 : 0;
+	}
+	string temp = to_string(i); temp.pb(' ');
+	temp.append(to_string(j)); temp.pb(' ');
+	temp.append(to_string(checkt));
+	if (dp.find(temp) != dp.end()) //lookup
+	{
+		return dp[temp];
+	}
+	for (int k = i + 1; k <= j - 1; k + 2) {
+		int LT = bool_parenthesis(s, i, k - 1, true);
+		int LF = bool_parenthesis(s, i, k - 1, false);
+		int RT = bool_parenthesis(s, k + 1, j , true);
+		int RF = bool_parenthesis(s, k + 1, j, false);
+		if (s[k] == '&')
+		{
+			if (checkt) {
+				ans += LT * RT;
+			}
+			else {
+				ans += RT * LF + RF * LT + RF * LF;
+			}
+		}
+		if (s[k] == '|')
+		{
+			if (checkt) {
+				ans += RT * LT + RT * LF + RF * LT;
+			}
+			else {
+				ans += LF * RF;
+			}
+		}
+		if (s[k] == '^')
+		{
+			if (checkt)
+			{
+				ans += RF * LT + RT * LF;
+			}
+			else {
+				ans += LF * RF  + LT * RT;
+			}
+		}
+	}
+	return dp[temp] = ans;
+}
+
+
+               // 3d array method 
+// Most optimised for worst edge test cases:
 int static dp[1001][1001][2];
-// optimsed using memorisation 
 int bool_parenthesis(string str, int i, int j, bool checkt)
 {
 	if (i > j) {
