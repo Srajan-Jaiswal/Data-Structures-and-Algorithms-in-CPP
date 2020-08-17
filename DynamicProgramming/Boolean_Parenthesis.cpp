@@ -94,8 +94,9 @@ int bool_parenthesis(string str, int i, int j, bool checkt)
 	{
 		return dp[i][j][checkt];
 	}
-	int ans;
-	for (int k = i + 1; k <= j - 1; K + 2) {
+	int ans = 0;
+	int LT, RT, LF, RF;
+	for (int k = i + 1; k <= j - 1; k + 2) {
 		// LT
 		if (dp[i][k - 1][true] != -1)
 		{
@@ -137,7 +138,7 @@ int bool_parenthesis(string str, int i, int j, bool checkt)
 			dp[k + 1][j][false] = RF;
 		}
 		// finding ans for each s[k]
-		if (s[k] == '&')
+		if (str[k] == '&')
 		{
 			if (checkt) {
 				ans = LT * RT;
@@ -146,7 +147,7 @@ int bool_parenthesis(string str, int i, int j, bool checkt)
 				ans += RT * LF + RF * LT + RF * LF;
 			}
 		}
-		if (s[k] == '|')
+		if (str[k] == '|')
 		{
 			if (checkt) {
 				ans += RT * LT + RT * LF + RF * LT;
@@ -155,7 +156,7 @@ int bool_parenthesis(string str, int i, int j, bool checkt)
 				ans += LF * RF;
 			}
 		}
-		if (s[k] == '^')
+		if (str[k] == '^')
 		{
 			if (checkt)
 			{
