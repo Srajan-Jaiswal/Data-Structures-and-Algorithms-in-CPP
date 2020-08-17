@@ -16,6 +16,7 @@ using namespace std;
 
 // unordered map  method
 // Memorisation in recursion
+
 int ans = 0;
 unordered_map<string, int> dp;
 int bool_parenthesis(string s, int i, int j, bool checkt)
@@ -26,10 +27,10 @@ int bool_parenthesis(string s, int i, int j, bool checkt)
 	if (i == j) {
 		if (checkt)
 			return s[i] == 'T' ? 1 : 0;
-	}
 	else {
 		return s[i] == 'F' ? 1 : 0;
 	}
+    }
 	string temp = to_string(i); temp.pb(' ');
 	temp.append(to_string(j)); temp.pb(' ');
 	temp.append(to_string(checkt));
@@ -37,7 +38,7 @@ int bool_parenthesis(string s, int i, int j, bool checkt)
 	{
 		return dp[temp];
 	}
-	for (int k = i + 1; k <= j - 1; k + 2) {
+	for (int k = i + 1; k <= j - 1; k += 2) {
 		int LT = bool_parenthesis(s, i, k - 1, true);
 		int LF = bool_parenthesis(s, i, k - 1, false);
 		int RT = bool_parenthesis(s, k + 1, j , true);
@@ -71,7 +72,7 @@ int bool_parenthesis(string s, int i, int j, bool checkt)
 			}
 		}
 	}
-	return dp[temp] = ans;
+	return dp[temp] = ans%1003;
 }
 
 
@@ -83,20 +84,23 @@ int bool_parenthesis(string str, int i, int j, bool checkt)
 	if (i > j) {
 		return dp[i][j][checkt] = 0;
 	}
+
 	if (i == j) {
-		if (checkt)
+		if (checkt) {
 			return str[i] == 'T' ? dp[i][j][checkt] = 1 : dp[i][j][checkt] = 0;
+		}
+		else {
+			return str[i] == 'F' ? dp[i][j][checkt] = 1 : dp[i][j][checkt] = 0;
+		}
 	}
-	else {
-		return str[i] == 'F' ? dp[i][j][checkt] = 1 : dp[i][j][checkt] = 0;
-	}
+
 	if (dp[i][j][checkt] != -1)
 	{
 		return dp[i][j][checkt];
 	}
 	int ans = 0;
 	int LT, RT, LF, RF;
-	for (int k = i + 1; k <= j - 1; k + 2) {
+	for (int k = i + 1; k <= j - 1; k += 2) {
 		// LT
 		if (dp[i][k - 1][true] != -1)
 		{
@@ -141,7 +145,7 @@ int bool_parenthesis(string str, int i, int j, bool checkt)
 		if (str[k] == '&')
 		{
 			if (checkt) {
-				ans = LT * RT;
+				ans += LT * RT;
 			}
 			else {
 				ans += RT * LF + RF * LT + RF * LF;
@@ -167,7 +171,7 @@ int bool_parenthesis(string str, int i, int j, bool checkt)
 			}
 		}
 	}
-	return dp[i][j][checkt] = ans;
+	return dp[i][j][checkt] = ans%1003;
 }
 int32_t main()
 {
