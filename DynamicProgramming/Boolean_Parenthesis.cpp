@@ -15,6 +15,7 @@ using namespace std;
 #define case cout << "Case " << t++ << ": ";
 
 int static dp[1001][1001][2];
+// optimsed using memorisation 
 int bool_parenthesis(string str, int i, int j, bool checkt)
 {
 	if (i > j) {
@@ -122,7 +123,7 @@ int32_t main()
 		cin >> str;
 		int n = str.length();
 		memset(dp, -1, sizeOf(dp));
-		cout << part_palindrome_rec(str, 0, n - 1, true) << endl;
+		cout << bool_parenthesis(str, 0, n - 1, true) << endl;
 	}
 	return 0;
 }
