@@ -14,28 +14,7 @@ using namespace std;
 #define all(v) (v).begin(), (v).end()
 #define case cout << "Case " << t++ << ": ";
 // recursion  solution LIS  O(exponential)
-int LIS(int *arr, int n, int *ans)   
-{
-	if (n == 1) {
-		return 1;
-	}
-	int res, answ = 1;
-	for (int i = 1; i < n; i++) {
-		res = LIS(arr, n, ans);
-		if (arr[i - 1] <= arr[n - 1] && res + 1 > answ) {
-			answ = 1 + res;
-		}
-	}
-	if (*ans < answ) {
-		*ans = answ;
-	}
-	return answ;
-}
-int LIS_util(int *arr, int n) {
-	int *lis = 1;
-	LIS(arr, n, &lis);
-	return lis;
-}
+
 
 //  DP (Bottom UP) solution  
 int LIS_DP(int *arr, int n) {        
