@@ -7,7 +7,7 @@ void upheapify(vector<int> &heap, int idx)
 	{
 		return;
 	}
-	int parent_idx = (idx - 1) / 2;
+	int parent_idx = (idx - 1) / 2;  //  parent node of the given index in  binary tree
 	if (heap[parent_idx] < heap[idx])
 	{
 		int temp = heap[parent_idx];
@@ -24,7 +24,7 @@ void build_heap(vector<int> &heap)
 {
 	for (int i = 0; i < heap.size(); i++)
 	{
-		upheapify(heap, i);
+		upheapify(heap, i);   // maintains the  max_heap
 	}
 }
 void display_heap(vector<int> &heap)
