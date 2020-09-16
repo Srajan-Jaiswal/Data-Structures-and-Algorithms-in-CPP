@@ -3,10 +3,10 @@
 using namespace std;
 void downheapify(vector<int> &heap, int idx)
 {
- int left_idx=2*idx+1;
- int right_idx=2*idx+2;
- int largest_idx=idx;
- if(left_idx<heap.size() && heap[left_idx]>heap[largest_idx])
+ int left_idx=2*idx+1;   // left child
+ int right_idx=2*idx+2;  // right child
+ int largest_idx=idx;   
+ if(left_idx < heap.size() && heap[left_idx] >heap[largest_idx])
  {
  	largest_idx=left_idx;
  }
