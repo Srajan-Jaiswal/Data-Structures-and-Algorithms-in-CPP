@@ -8,7 +8,7 @@ template<typename T>
 class graph {
 public:
 	map<T, list<pair<T,int> > > adjlist;
-
+       // adding edges
 	void addEdge(T u, T v, int dist,bool bidirec = 1)
 	{
 		 
@@ -17,7 +17,7 @@ public:
 		if (bidirec)
 			adjlist[v].push_back(make_pair(u, dist));
 	}
-
+        // Print
 	void print_adj()
 	{
 		for (auto n : adjlist)
@@ -30,7 +30,7 @@ public:
 				cout << endl;
 		}
 	}
-
+        // BFS
 	void bfs(T u)
 	{
 		map< T, bool> visited;
@@ -52,7 +52,7 @@ public:
 			}
 		}
 	}
-
+         // DFS
 	void dfs_helper(T src,map<T,bool> &visited)
 	{
 		visited[src] = true;
@@ -72,7 +72,7 @@ public:
 		map < T, bool> visited;
 		dfs_helper(src, visited);
 	}
-
+         // Shortest path
 	void bfs_sssp(T src)
 	{
 
@@ -119,7 +119,7 @@ public:
 
 	}
 
-
+        // Dijkstra's 
 	void dijkstra(T src)
 	{
 		map<T, int> dist;
