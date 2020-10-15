@@ -52,5 +52,16 @@ void is_cycle()
 
 int main()
 {
-
+ Graph  g(v);
+	 g.addEdge(0,1);
+	 g.addEdge(1,2);
+	 g.addEdge(0,4);
+	 g.addEdge(2,4);
+	 g.addEdge(2,3);
+	 g.addEdge(3,5);
+	 g.addEdge(3,4);
+	 g.print();
+	 cout<<endl;
+	 g.dfs_topological();
+	 return 0;
 }
