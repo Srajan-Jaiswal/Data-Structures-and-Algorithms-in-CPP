@@ -23,7 +23,7 @@ bool itr_cycle(int node, bool *visited, bool *stack)
 {
   visited[node]=true;
   stack[node]=true;
-  
+  // DFS (maintaing stack for detecting back  edge and visted array)
   for(auto nbr: l[node])
   {
   	if(stack[nbr]==true)
