@@ -10,10 +10,7 @@ class Graph
 {
 	map<T,list<T>> adjlist;
 public:
-	Graph()
-	{
-
-	}
+	Graph(){}
 
 void addEdge(T U, T V, bool bidrc=true)
 {
@@ -87,4 +84,4 @@ int main()
 	 g.print();
 	 g.bfs(0);
 	 return 0;
-}000
+}
