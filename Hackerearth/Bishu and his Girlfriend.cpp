@@ -77,8 +77,4 @@ int32_t main()
 		}
 	}
 	cout << ans << endl;
-	for(auto it : dis)
-	{
-		cout<<it.first<<"-->>"<<it.second<<endl;
-	}
 }
