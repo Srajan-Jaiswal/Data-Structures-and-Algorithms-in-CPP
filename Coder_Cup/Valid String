@@ -1,0 +1,46 @@
+
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include<map>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+
+int main() {
+    string str;
+    cin>>str;
+    map<char,int> m;
+    int cnt=0;
+    int flag;
+    int st;
+    for(int i=0;i<str.length();i++)
+    {
+       m[str[i]]++;
+    }
+    for(int i=0;i<str.length()-1;i++)
+    {
+      if(m[str[i]]==m[str[i+1]])
+      {
+          continue;
+          flag=m[str[i]];
+      }
+        else{
+            cnt++;
+            st=i+1;
+        }
+    }
+    if(cnt==0)
+    {
+        cout<<"YES"<<endl;
+    }
+    else if(cnt == 1 && m[st]-flag==1)
+    {
+        cout<<"YES"<<endl;
+    }
+    else{
+        cout<<"NO"<<endl;
+    }
+    
+}
