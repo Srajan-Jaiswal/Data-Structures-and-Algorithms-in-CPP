@@ -49,6 +49,7 @@ bool check_palindrome(node* head)
 			return false;
 	}
 }
+// for printing the linked list
 void print_LL(node* head)
 {
 	while(head!=NULL)
