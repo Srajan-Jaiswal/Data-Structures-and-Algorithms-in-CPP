@@ -2,7 +2,7 @@
 #include <queue>
 using namespace std;
 
-class Node {
+class Node { 
 public:
     int data;
     Node * left;
@@ -14,19 +14,20 @@ public:
     }
 };
 
-Node* createBT() {
+Node* createBT() { //Node* return data type
     int x;
     cin >> x;
-    if (x == -1) return NULL;
-
-    Node * root = new Node(x);
+    if (x == -1){
+         return NULL;
+    }
+    Node * root = new Node(x); //dynamic allocation  of class pointer type
     // cout << "Enter the left child of " << root->data << ": \n";
     root->left = createBT();
     // cout << "Enter the right child " << root->data << " : \n";
     root->right = createBT();
     return root;
 }
-
+// preorder traversal 
 void printBT(Node * root) {     //O(N) every node is traversed once!
     if (root == NULL) {
         return;
@@ -236,7 +237,7 @@ void printPath(Node * arr[], int be, int en){
 }
 
 Node * arr[100];    //array of Nodes
-void printRoot2Leaf(Node root , ArrayList<Node> a); 
+//void printRoot2Leaf(Node root , ArrayList<Node> a); 
 
 
 void printRoot2Leaf(Node * root, int idx){      //O(h^2) where h is the height of the tree. this function traverses untill
@@ -256,9 +257,10 @@ void printRoot2Leaf(Node * root, int idx){      //O(h^2) where h is the height o
 }
 
 int main() {
-    // Node * root = createBT();
+   // Node * root = createBT();
     Node * root = inputLevel();
-    // printBT(root);
+   printBT(root);
+   cout<<endl;
     // printLevel(root);
 
     // int cntAns = cnt(root);
@@ -275,9 +277,6 @@ int main() {
     // cout << ans;
 
     // printKthLevel(root, 2);
-
     printRoot2Leaf(root, 0);
-
-
 
 }
