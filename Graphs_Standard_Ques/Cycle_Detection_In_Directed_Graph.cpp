@@ -1,7 +1,4 @@
-#include<iostream>
-using namespace std;
-class Graph:
-{
+
   list<int> *l;
   int v;
 public:
