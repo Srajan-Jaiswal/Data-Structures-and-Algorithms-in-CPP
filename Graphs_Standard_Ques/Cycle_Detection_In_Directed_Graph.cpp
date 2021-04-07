@@ -1,4 +1,7 @@
-
+#include<iostream>
+using namespace std;
+class Graph:
+{
   list<int> *l;
   int v;
 public:
@@ -6,7 +9,10 @@ public:
 	{
      this->v=v;
      l= new list<int>[v];
-	}
+	}#include<iostream>
+using namespace std;
+class Graph:
+{
 
 void addEdge(int U,int V, bool bidrc=true)
 {
