@@ -1,83 +1,77 @@
-#include<iostream>
-#include<map>
-#include<list>
+#include <bits/stdc++.h>
 using namespace std;
-template<typename T>
-class Graph
-{
-	map<T, list<T>> adjList;
-public:
-	Graph()
-	{
 
+class Solution{
+    void findTopoSort(int node, vector<int> &vis, stack<int> &st, vector<int> adj[]) {
+        vis[node] = 1; 
+        
+        for(auto it : adj[node]) {
+            if(!vis[it]) {
+                findTopoSort(it, vis, st, adj); 
+            }
+        }
+        st.push(node); 
+    }
+	public:
+	vector<int> topoSort(int N, vector<int> adj[]) {
+	    stack<int> st; 
+	    vector<int> vis(N, 0); 
+	    for(int i = 0;i<N;i++) {
+	        if(vis[i] == 0) {
+	            findTopoSort(i, vis, st, adj); 
+	        }
+	    }
+	    vector<int> topo;
+	    while(!st.empty()) {
+	        topo.push_back(st.top()); 
+	        st.pop(); 
+	    }
+	    return topo; 
+	    
 	}
-void addEdge( T U, T V, bool bidrc=false)
-{
-	adjList[U].push_back(V);
-	if(bidrc)
-	{
-    adjList[V].push_back(U);
-	}
-}
-void print()
-{
-	for(auto it1: adjList)
-	{
-		cout<<it1.first<<"-->>";
-		for(auto it2: it1.second)
-		{
-			cout<<it2<<" ";
-		}
-		cout<<endl;
-	}
-
-}
-void dfs_help(T node,map<T,bool> &visited, list<T> &ordering)
-{
-	visited[node]=true
-   
-   for(auto nbr: adjList[node])
-   {
-   	 if(!visited[nbr])
-   	 {
-   	 	dfs_help(nbr,visited,ordering);
-   	 }
-   }
-   	 // for topological sort
-   	 // at this point all the children of the node is visited acc. to  yor dfs algorithm 
-    ordering.push_front(node); // Try to understand here we when we reached to  the node where no more nodes are left then recursive step is being over and then we push_front() that node in  linked list..
-}
-void dfs_topological()
-{
-	map<T,bool> visited;
-	list<T> ordering;
-	for(auto i:adjList)
-	{
-		 T node=i.first;
-		 if(!visited[node])
-		 {
-		 	dfs_help(node,visited,ordering);
-		 }
-	}
-	// print the list
-	for(auto ele: ordering)
-	{
-		cout<<ele<<"--->>";
-	}
-}
 };
-int main()
-{
-	 Graph <int> g;
-	 g.addEdge(0,1);
-	 g.addEdge(1,2);
-	 g.addEdge(0,4);
-	 g.addEdge(2,4);
-	 g.addEdge(2,3);
-	 g.addEdge(3,5);
-	 g.addEdge(3,4);
-	 g.print();
-	 cout<<endl;
-	 g.dfs_topological();
-	 return 0;
+
+// { Driver Code Starts.
+
+/*  Function to check if elements returned by user
+*   contains the elements in topological sorted form
+*   V: number of vertices
+*   *res: array containing elements in topological sorted form
+*   adj[]: graph input
+*/
+int check(int V, vector <int> &res, vector<int> adj[]) {
+    vector<int> map(V, -1);
+    for (int i = 0; i < V; i++) {
+        map[res[i]] = i;
+    }
+    for (int i = 0; i < V; i++) {
+        for (int v : adj[i]) {
+            if (map[i] > map[v]) return 0;
+        }
+    }
+    return 1;
 }
+
+int main() {
+    int T;
+    cin >> T;
+    while (T--) {
+        int N, E;
+        cin >> E >> N;
+        int u, v;
+
+        vector<int> adj[N];
+
+        for (int i = 0; i < E; i++) {
+            cin >> u >> v;
+            adj[u].push_back(v);
+        }
+        
+        Solution obj;
+        vector <int> res = obj.topoSort(N, adj);
+
+        cout << check(N, res, adj) << endl;
+    }
+    
+    return 0;
+}  // } Driver Code Ends
